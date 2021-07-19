@@ -1,0 +1,35 @@
+#! /bin/bash
+
+file=$1
+baseFileName=$(basename $file)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+outFolder=$2
+
+minThres=$3
+maxThres=$4
+thresStep=$5
+
+minN=$6
+maxN=$7
+nStep=$8
+
+currentN=$minN
+
+while [ $currentN -le $maxN ]
+do
+	currentThres=$(bc <<< "$minThres - $thresStep")
+	while (( $(echo "$currentThres < $maxThres" |bc -l) ))
+	do
+		currentThres=$(bc <<< "$currentThres + $thresStep")
+		newName="$(tr '.' '-' <<< "$baseFileName-thres-0$currentThres-n-$currentN").graph"
+		echo "$DIR/converter.py" $file $currentThres $currentN " > " "$outFolder/$newName"
+		
+		if [[ -f "$outFolder/$newName" ]]; then
+			rm "$outFolder/$newName" 
+		fi
+		
+		python3 "$DIR/converter.py" $file $currentThres $currentN > "$outFolder/$newName"
+	done
+	currentN=$[$currentN + $nStep]
+done
