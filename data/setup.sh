@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 datasets=$(find . -maxdepth 2 -mindepth 2 -type d)
 
