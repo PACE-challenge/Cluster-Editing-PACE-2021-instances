@@ -48,3 +48,7 @@
     References:  
     [4] J. Leskovec and A. Krevl. SNAP Datasets: Stanford Large Network Dataset Collection. http://snap.stanford.edu/data. June 2014
 
+
+# Solvers
+
+See the [PACE 2021](https://doi.org/10.4230/LIPIcs.IPEC.2021.26) report for a list of known solvers with public repository as well as the ranking. 

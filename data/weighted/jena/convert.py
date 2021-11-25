@@ -41,7 +41,8 @@ for instance in instances:
     S = S - np.nanquantile(S, 0.7)
     for i in range(n):
         S[i,i] = 0
-    S = S / np.max(np.abs(S)) / 2
+    if np.max(np.abs(S)) != 0:
+        S = S / np.max(np.abs(S)) / 2
     S = S + 0.5
     for i in range(n):
         S[i,i] = 1
